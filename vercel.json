@@ -1,0 +1,11 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/remind",
+      "schedule": "*/5 * * * *"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  }
+}

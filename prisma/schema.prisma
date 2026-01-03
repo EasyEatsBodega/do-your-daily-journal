@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(cuid())
+  googleUserId     String   @unique
+  email            String
+  calendarId       String   @default("primary")
+
+  // IANA time zone from the user's selected Google Calendar (e.g., "Europe/London")
+  timeZone         String   @default("UTC")
+
+  // Guard so we send at most one reminder per local day
+  lastReminderSentYmd String?
+
+  accessToken      String?
+  refreshToken     String?
+  tokenExpiryMs    BigInt?  // epoch ms
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  entries          JournalEntry[]
+}
+
+model JournalEntry {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Store date as YYYY-MM-DD in user's journal timezone policy.
+  // Date is computed in the user's own timeZone (IANA string), sourced from their Google Calendar.
+  date             String
+
+  accomplished     String
+  couldDoBetter    String
+  proudHappy       String
+
+  status           EntryStatus @default(DRAFT)
+
+  calendarEventId  String?  // Google Calendar event id
+  imageUrl         String?  // hosted generated image
+  referenceImageUrl String? // hosted uploaded reference (optional)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([userId, date])
+}
+
+enum EntryStatus {
+  DRAFT
+  SUBMITTED
+}
+
