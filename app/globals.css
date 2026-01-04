@@ -96,6 +96,8 @@ body {
   /* Handwriting style for labels */
   .journal-prompt {
     @apply font-handwriting text-3xl text-ink dark:text-sepia-warm font-semibold;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   /* Date header styling */
