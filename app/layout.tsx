@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Merriweather, Courier_Prime } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const merriweather = Merriweather({
@@ -41,7 +42,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${merriweather.variable} ${courierPrime.variable}`}>{children}</body>
+      <body className={`${merriweather.variable} ${courierPrime.variable}`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
