@@ -40,7 +40,7 @@ export async function GET(request: Request) {
       if (user.lastReminderSentYmd === todayYmd) continue
 
       // Check if user already submitted today
-      const hasSubmittedToday = user.entries.some((e) => e.date === todayYmd)
+      const hasSubmittedToday = user.entries.some((e: any) => e.date === todayYmd)
       if (hasSubmittedToday) continue
 
       // Send reminder email
