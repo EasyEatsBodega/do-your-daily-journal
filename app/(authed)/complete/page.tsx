@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { AuthGate } from '@/components/AuthGate'
 import { HamburgerMenu } from '@/components/HamburgerMenu'
@@ -14,7 +14,7 @@ interface Entry {
   proudHappy: string
 }
 
-export default function CompletePage() {
+function CompletePageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const date = searchParams.get('date')
@@ -134,6 +134,20 @@ export default function CompletePage() {
         </div>
       </div>
     </AuthGate>
+  )
+}
+
+export default function CompletePage() {
+  return (
+    <Suspense fallback={
+      <AuthGate>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-lg">Loading...</div>
+        </div>
+      </AuthGate>
+    }>
+      <CompletePageContent />
+    </Suspense>
   )
 }
 
