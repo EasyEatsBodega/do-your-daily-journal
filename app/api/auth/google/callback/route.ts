@@ -27,12 +27,19 @@ export async function GET(request: Request) {
       console.log('No refresh token in response - will use existing token for this user')
     }
 
-    // Get user info
+    // Set credentials on the OAuth client
     oauth2Client.setCredentials(tokens)
+
+    // Verify we have valid credentials
+    console.log('Access token present:', !!tokens.access_token)
+    console.log('Token type:', tokens.token_type)
+
+    // Get user info
     const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client })
     const { data } = await oauth2.userinfo.get()
 
     if (!data.id || !data.email) {
+      console.error('User info missing id or email:', data)
       return NextResponse.redirect(new URL('/login?error=no_user_info', request.url))
     }
 
