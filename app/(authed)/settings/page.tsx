@@ -35,7 +35,14 @@ export default function SettingsPage() {
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
-    router.push('/login')
+    // Use window.location to force a full page reload and clear all state
+    window.location.href = '/login'
+  }
+
+  const handleSwitchAccount = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    // Redirect to OAuth with account selection forced
+    window.location.href = '/api/auth/google/start'
   }
 
   const handleReconnect = () => {
@@ -97,14 +104,20 @@ export default function SettingsPage() {
 
             <div className="mt-8 space-y-4">
               <button
-                onClick={handleReconnect}
+                onClick={handleSwitchAccount}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
-                Reconnect Google
+                Switch Google Account
+              </button>
+              <button
+                onClick={handleReconnect}
+                className="w-full bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                Reconnect Current Account
               </button>
               <button
                 onClick={handleLogout}
-                className="w-full bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="w-full bg-red-100 hover:bg-red-200 dark:bg-red-900/20 dark:hover:bg-red-900/40 text-red-600 dark:text-red-400 font-semibold py-3 px-6 rounded-lg transition-colors"
               >
                 Sign out
               </button>
@@ -124,4 +137,3 @@ export default function SettingsPage() {
     </AuthGate>
   )
 }
-
