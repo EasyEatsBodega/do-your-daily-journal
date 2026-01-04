@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { AuthGate } from '@/components/AuthGate'
+import { HamburgerMenu } from '@/components/HamburgerMenu'
 // formatDate will be defined inline to avoid server/client issues
 
 interface Entry {
@@ -149,22 +150,15 @@ export default function TodayPage() {
 
   return (
     <AuthGate>
+      <HamburgerMenu />
       <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 py-8">
         <div className="max-w-2xl mx-auto px-4">
           <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h1 className="text-3xl font-bold mb-1">{dateDisplay}</h1>
-                <p className="text-neutral-500 dark:text-neutral-400">
-                  Your daily journal for today
-                </p>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="text-sm text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
-              >
-                Sign out
-              </button>
+            <div className="mb-6">
+              <h1 className="text-3xl font-bold mb-1">{dateDisplay}</h1>
+              <p className="text-neutral-500 dark:text-neutral-400">
+                Your daily journal for today
+              </p>
             </div>
 
             <div className="space-y-6">

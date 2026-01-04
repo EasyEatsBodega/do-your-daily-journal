@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { AuthGate } from '@/components/AuthGate'
+import { HamburgerMenu } from '@/components/HamburgerMenu'
 // formatDate will be defined inline
 
 interface Entry {
@@ -85,6 +86,7 @@ export default function EntryPage() {
 
   return (
     <AuthGate>
+      <HamburgerMenu />
       <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 py-8">
         <div className="max-w-2xl mx-auto px-4">
           <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
