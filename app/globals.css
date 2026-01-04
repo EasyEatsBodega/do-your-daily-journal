@@ -17,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-crimson), Georgia, serif;
+  font-family: var(--font-merriweather), Georgia, serif;
 }
 
 @layer utilities {

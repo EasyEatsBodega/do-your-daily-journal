@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Crimson_Text, Caveat } from 'next/font/google';
+import { Merriweather, Courier_Prime } from 'next/font/google';
 import "./globals.css";
 
-const crimsonText = Crimson_Text({
-  weight: ['400', '600', '700'],
+const merriweather = Merriweather({
+  weight: ['300', '400', '700', '900'],
   subsets: ['latin'],
-  variable: '--font-crimson',
+  variable: '--font-merriweather',
 });
 
-const caveat = Caveat({
-  weight: ['400', '500', '600', '700'],
+const courierPrime = Courier_Prime({
+  weight: ['400', '700'],
   subsets: ['latin'],
-  variable: '--font-caveat',
+  variable: '--font-courier',
 });
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${crimsonText.variable} ${caveat.variable}`}>{children}</body>
+      <body className={`${merriweather.variable} ${courierPrime.variable}`}>{children}</body>
     </html>
   );
 }
