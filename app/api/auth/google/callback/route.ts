@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getOAuthClient } from '@/lib/google'
 import { db } from '@/lib/db'
-import { createSession } from '@/lib/auth'
+import { createSession, deleteSession } from '@/lib/auth'
 import { google } from 'googleapis'
 
 export async function GET(request: Request) {
@@ -35,6 +35,9 @@ export async function GET(request: Request) {
       calendarId: 'primary',
     })
     const timeZone = calendarList.data.timeZone || 'UTC'
+
+    // Clear any existing session first to prevent cross-user data leakage
+    await deleteSession()
 
     // Upsert user
     const user = await db.user.upsert({

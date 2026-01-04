@@ -44,9 +44,8 @@ export default function TodayPage() {
           day: 'numeric',
         }).format(date))
 
-        if (data.status === 'SUBMITTED') {
-          router.push(`/complete?date=${data.date}`)
-        }
+        // Allow users to re-edit their entry even if already submitted today
+        // Don't auto-redirect - they may want to update their entry
       }
     } catch (error) {
       console.error('Failed to fetch entry:', error)

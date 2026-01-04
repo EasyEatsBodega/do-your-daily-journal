@@ -23,6 +23,11 @@ export function getZonedParts(date: Date, timeZone: string) {
   };
 }
 
+/**
+ * Get today's date (YYYY-MM-DD) in the user's timezone.
+ * After midnight (12:00 AM) local time, this will return the next calendar day.
+ * Example: At 12:01 AM on Jan 5th in user's timezone → returns "2026-01-05"
+ */
 export function getTodayYmd(timeZone: string): string {
   return getZonedParts(new Date(), timeZone).ymd;
 }
