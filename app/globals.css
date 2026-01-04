@@ -79,7 +79,7 @@ body {
 
   /* Handwriting style for labels */
   .journal-prompt {
-    @apply font-handwriting text-2xl text-ink-light dark:text-sepia-warm/70;
+    @apply font-handwriting text-3xl text-ink dark:text-sepia-warm font-semibold;
   }
 
   /* Date header styling */
