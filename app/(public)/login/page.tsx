@@ -50,11 +50,11 @@ export default function LoginPage() {
 
           <div className="mt-6 text-xs text-neutral-500 dark:text-neutral-500 space-y-2">
             <p>
-              We'll ask for Calendar access to save your daily journal as an
+              We&apos;ll ask for Calendar access to save your daily journal as an
               all-day event after you submit.
             </p>
             <p>
-              We'll ask for Gmail send permission to email you a reminder at
+              We&apos;ll ask for Gmail send permission to email you a reminder at
               8pm local time.
             </p>
           </div>

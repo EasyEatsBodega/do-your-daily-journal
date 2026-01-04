@@ -114,7 +114,7 @@ export default function EntryPage() {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-2">
-                  What I'm proud of
+                  What I&apos;m proud of
                 </h3>
                 <p className="text-neutral-900 dark:text-neutral-100 text-lg">
                   {entry.proudHappy}
