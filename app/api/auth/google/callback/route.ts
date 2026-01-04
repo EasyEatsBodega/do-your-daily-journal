@@ -16,8 +16,15 @@ export async function GET(request: Request) {
     const oauth2Client = getOAuthClient()
     const { tokens } = await oauth2Client.getToken(code)
 
-    if (!tokens.access_token || !tokens.refresh_token) {
-      return NextResponse.redirect(new URL('/login?error=no_tokens', request.url))
+    if (!tokens.access_token) {
+      console.error('No access token received')
+      return NextResponse.redirect(new URL('/login?error=no_access_token', request.url))
+    }
+
+    // refresh_token is only provided on first authorization or when prompt=consent
+    // For existing users, we'll keep their existing refresh_token
+    if (!tokens.refresh_token) {
+      console.log('No refresh token in response - will use existing token for this user')
     }
 
     // Get user info
@@ -45,7 +52,8 @@ export async function GET(request: Request) {
       update: {
         email: data.email,
         accessToken: tokens.access_token,
-        refreshToken: tokens.refresh_token,
+        // Only update refresh_token if we received a new one
+        ...(tokens.refresh_token && { refreshToken: tokens.refresh_token }),
         tokenExpiryMs: tokens.expiry_date ? BigInt(tokens.expiry_date) : null,
         timeZone,
       },
@@ -53,7 +61,7 @@ export async function GET(request: Request) {
         googleUserId: data.id,
         email: data.email,
         accessToken: tokens.access_token,
-        refreshToken: tokens.refresh_token,
+        refreshToken: tokens.refresh_token || '',
         tokenExpiryMs: tokens.expiry_date ? BigInt(tokens.expiry_date) : null,
         timeZone,
       },
@@ -65,6 +73,11 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL('/today', request.url))
   } catch (error) {
     console.error('OAuth callback error:', error)
+    // Log more details about the error
+    if (error instanceof Error) {
+      console.error('Error message:', error.message)
+      console.error('Error stack:', error.stack)
+    }
     return NextResponse.redirect(new URL('/login?error=callback_failed', request.url))
   }
 }
