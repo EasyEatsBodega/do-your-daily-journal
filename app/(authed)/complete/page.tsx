@@ -104,7 +104,7 @@ export default function CompletePage() {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
-                  What I'm proud of
+                  What I&apos;m proud of
                 </h3>
                 <p className="text-neutral-900 dark:text-neutral-100">
                   {entry.proudHappy}
@@ -128,7 +128,7 @@ export default function CompletePage() {
             </div>
 
             <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
-              Come back tomorrow. We'll remind you at 8pm.
+              Come back tomorrow. We&apos;ll remind you at 8pm.
             </p>
           </div>
         </div>

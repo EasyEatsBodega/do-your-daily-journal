@@ -230,7 +230,7 @@ export default function EditDatePage() {
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  One thing you'd do differently next time?
+                  One thing you&apos;d do differently next time?
                 </label>
                 <input
                   type="text"
@@ -243,7 +243,7 @@ export default function EditDatePage() {
 
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  One small win you're proud of?
+                  One small win you&apos;re proud of?
                 </label>
                 <input
                   type="text"
