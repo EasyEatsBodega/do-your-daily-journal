@@ -33,10 +33,11 @@ export default function CompletePage() {
       if (res.ok) {
         const data = await res.json()
         setEntry(data)
-        const dateObj = new Date(data.date + 'T00:00:00')
-        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        // Format date for display - parse as UTC to avoid timezone shifts
+        const [year, month, day] = data.date.split('-').map(Number)
+        const dateObj = new Date(Date.UTC(year, month - 1, day))
         setDateDisplay(new Intl.DateTimeFormat('en-US', {
-          timeZone,
+          timeZone: 'UTC',
           weekday: 'long',
           month: 'short',
           day: 'numeric',
