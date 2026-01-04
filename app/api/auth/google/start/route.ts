@@ -12,7 +12,7 @@ export async function GET() {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: scopes,
-    prompt: 'consent',
+    prompt: 'select_account consent',
   })
 
   return NextResponse.redirect(authUrl)
