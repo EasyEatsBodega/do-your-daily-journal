@@ -11,7 +11,6 @@ interface Entry {
   accomplished: string
   couldDoBetter: string
   proudHappy: string
-  imageUrl?: string
 }
 
 export default function EntryPage() {
@@ -92,16 +91,6 @@ export default function EntryPage() {
             <p className="text-neutral-500 dark:text-neutral-400 mb-8">
               Your journal entry
             </p>
-
-            {entry.imageUrl && (
-              <div className="mb-8">
-                <img
-                  src={entry.imageUrl}
-                  alt="Daily memory"
-                  className="w-full rounded-lg shadow-lg"
-                />
-              </div>
-            )}
 
             <div className="space-y-6">
               <div>

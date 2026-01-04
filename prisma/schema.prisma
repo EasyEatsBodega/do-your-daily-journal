@@ -48,8 +48,6 @@ model JournalEntry {
   status           EntryStatus @default(DRAFT)
 
   calendarEventId  String?  // Google Calendar event id
-  imageUrl         String?  // hosted generated image
-  referenceImageUrl String? // hosted uploaded reference (optional)
 
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

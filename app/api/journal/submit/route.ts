@@ -46,9 +46,6 @@ export async function POST(request: Request) {
     },
   })
 
-  // Note: Image generation can be triggered separately via /api/image/generate
-  // For MVP, we skip auto-generation to avoid blocking the submit flow
-
   // Upsert calendar event
   let calendarEventId = entry.calendarEventId
   try {
@@ -63,10 +60,7 @@ export async function POST(request: Request) {
         `Proud: ${shorten(proudHappy, 120)}`,
         '',
         `Open full entry: ${appBaseUrl}/entry/${today}`,
-        entry.imageUrl ? `Image: ${entry.imageUrl}` : null,
-      ]
-        .filter(Boolean)
-        .join('\n'),
+      ].join('\n'),
       start: { date: today },
       end: { date: nextDate(today) },
       extendedProperties: {
@@ -105,8 +99,6 @@ export async function POST(request: Request) {
     date: entry.date,
     entry,
     calendarEventId,
-    imageUrl: entry.imageUrl,
-    imageStatus: entry.imageUrl ? 'complete' : (process.env.OPENAI_API_KEY ? 'processing' : 'none'),
   })
 }
 

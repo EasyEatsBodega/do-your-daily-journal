@@ -11,7 +11,6 @@ interface Entry {
   accomplished: string
   couldDoBetter: string
   proudHappy: string
-  imageUrl?: string
 }
 
 export default function CompletePage() {
@@ -79,16 +78,6 @@ export default function CompletePage() {
             <p className="text-neutral-600 dark:text-neutral-400 text-center mb-8">
               Your journal is now attached to today in Google Calendar.
             </p>
-
-            {entry.imageUrl && (
-              <div className="mb-8">
-                <img
-                  src={entry.imageUrl}
-                  alt="Daily memory"
-                  className="w-full rounded-lg shadow-lg"
-                />
-              </div>
-            )}
 
             <div className="bg-neutral-50 dark:bg-neutral-700 rounded-lg p-6 space-y-4 mb-6">
               <div>

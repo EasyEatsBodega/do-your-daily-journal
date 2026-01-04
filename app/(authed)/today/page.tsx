@@ -11,8 +11,6 @@ interface Entry {
   accomplished: string
   couldDoBetter: string
   proudHappy: string
-  imageUrl?: string
-  referenceImageUrl?: string
 }
 
 export default function TodayPage() {
