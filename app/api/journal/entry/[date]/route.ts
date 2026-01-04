@@ -30,7 +30,6 @@ export async function GET(
     accomplished: entry.accomplished,
     couldDoBetter: entry.couldDoBetter,
     proudHappy: entry.proudHappy,
-    imageUrl: entry.imageUrl,
   })
 }
 

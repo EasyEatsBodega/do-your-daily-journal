@@ -4,7 +4,10 @@
       "Bash(cat:*)",
       "Bash(git -C /c/Users/easye/Your-Daily-Journal log --oneline -10)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git remote set-url:*)"
     ]
   }
 }
