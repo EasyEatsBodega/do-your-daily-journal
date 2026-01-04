@@ -32,6 +32,14 @@ export default function TodayPage() {
       const res = await fetch('/api/journal/get-today')
       if (res.ok) {
         const data = await res.json()
+
+        // If entry is already submitted, redirect to complete page
+        // Today's page should only show fresh drafts for the current day
+        if (data.status === 'SUBMITTED') {
+          router.push(`/complete?date=${data.date}`)
+          return
+        }
+
         setEntry(data)
 
         // Format date for display - parse as UTC to avoid timezone shifts
@@ -43,9 +51,6 @@ export default function TodayPage() {
           month: 'short',
           day: 'numeric',
         }).format(date))
-
-        // Allow users to re-edit their entry even if already submitted today
-        // Don't auto-redirect - they may want to update their entry
       }
     } catch (error) {
       console.error('Failed to fetch entry:', error)

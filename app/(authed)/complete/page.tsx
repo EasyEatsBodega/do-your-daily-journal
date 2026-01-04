@@ -78,8 +78,11 @@ export default function CompletePage() {
         <div className="max-w-2xl mx-auto px-4">
           <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
             <h1 className="text-4xl font-bold mb-2 text-center">Saved.</h1>
+            <p className="text-xl font-semibold text-blue-600 dark:text-blue-400 text-center mb-2">
+              {dateDisplay}
+            </p>
             <p className="text-neutral-600 dark:text-neutral-400 text-center mb-8">
-              Your journal is now attached to today in Google Calendar.
+              Your journal is now attached to {dateDisplay} in Google Calendar.
             </p>
 
             <div className="bg-neutral-50 dark:bg-neutral-700 rounded-lg p-6 space-y-4 mb-6">
@@ -111,16 +114,16 @@ export default function CompletePage() {
 
             <div className="flex gap-4 justify-center">
               <button
-                onClick={() => router.push(`/entry/${date}`)}
+                onClick={() => router.push(`/edit/${date}`)}
                 className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
               >
-                View today's entry
+                Edit entry
               </button>
               <button
-                onClick={() => router.push('/today')}
+                onClick={() => router.push(`/entry/${date}`)}
                 className="bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 font-semibold py-3 px-6 rounded-lg transition-colors"
               >
-                Back to today
+                View entry
               </button>
             </div>
 
