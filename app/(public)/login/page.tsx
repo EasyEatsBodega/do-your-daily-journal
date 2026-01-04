@@ -28,16 +28,16 @@ function LoginPageContent() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800">
-      <div className="max-w-md w-full mx-4">
-        <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
-          <h1 className="text-3xl font-bold mb-2 text-center">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4">
+      <div className="max-w-lg w-full mx-4">
+        <div className="journal-page rounded-lg p-10 sm:p-12">
+          <h1 className="font-handwriting text-5xl text-ink dark:text-sepia-warm mb-3 text-center">
             Calendar Journal
           </h1>
-          <p className="text-neutral-600 dark:text-neutral-400 text-center mb-8">
-            Your day, saved to your calendar.
+          <p className="font-serif text-xl text-ink-light dark:text-sepia-warm/80 text-center mb-8 italic">
+            Your day, saved to your calendar
           </p>
-          <p className="text-sm text-neutral-500 dark:text-neutral-500 text-center mb-6">
+          <p className="font-serif text-base text-ink-light dark:text-sepia-warm/70 text-center mb-8 leading-relaxed">
             Write a 2-minute check-in each night. Later, click any day in Google
             Calendar to remember it.
           </p>
@@ -45,17 +45,17 @@ function LoginPageContent() {
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-4 px-6 rounded-md transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mb-8"
           >
             {loading ? 'Loading...' : 'Continue with Google'}
           </button>
 
-          <div className="mt-6 text-xs text-neutral-500 dark:text-neutral-500 space-y-2">
-            <p>
+          <div className="border-t-2 border-ink-light/20 dark:border-sepia-warm/20 pt-6 space-y-3">
+            <p className="font-serif text-sm text-ink-light/80 dark:text-sepia-warm/60 leading-relaxed">
               We&apos;ll ask for Calendar access to save your daily journal as an
               all-day event after you submit.
             </p>
-            <p>
+            <p className="font-serif text-sm text-ink-light/80 dark:text-sepia-warm/60 leading-relaxed">
               We&apos;ll ask for Gmail send permission to email you a reminder at
               8pm local time.
             </p>

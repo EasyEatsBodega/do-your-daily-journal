@@ -136,7 +136,7 @@ export default function TodayPage() {
     return (
       <AuthGate>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-lg">Loading...</div>
+          <div className="text-lg font-serif">Loading your journal...</div>
         </div>
       </AuthGate>
     )
@@ -146,7 +146,7 @@ export default function TodayPage() {
     return (
       <AuthGate>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-lg">Failed to load entry</div>
+          <div className="text-lg font-serif">Failed to load entry</div>
         </div>
       </AuthGate>
     )
@@ -155,68 +155,81 @@ export default function TodayPage() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 py-8">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
-            <div className="mb-6">
-              <h1 className="text-3xl font-bold mb-1">{dateDisplay}</h1>
-              <p className="text-neutral-500 dark:text-neutral-400">
-                Your daily journal for today
-              </p>
-            </div>
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          {/* Journal Book Container */}
+          <div className="journal-page rounded-lg p-12 sm:p-16 relative">
+            {/* Decorative margin line (like a real journal) */}
+            <div className="absolute left-16 top-0 bottom-0 w-px bg-ink-light/20 dark:bg-sepia-warm/20"></div>
 
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  What did you get done today?
-                </label>
-                <textarea
-                  value={entry.accomplished}
-                  onChange={(e) => handleChange('accomplished', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  rows={6}
-                  placeholder="Write about what you accomplished today..."
-                />
+            {/* Content with left margin */}
+            <div className="ml-4">
+              {/* Date Header */}
+              <div className="mb-12 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-4">
+                <h1 className="journal-date mb-2">{dateDisplay}</h1>
+                <p className="font-handwriting text-xl text-ink-light dark:text-sepia-warm/60 italic">
+                  My daily reflection
+                </p>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  One thing you&apos;d do differently next time?
-                </label>
-                <input
-                  type="text"
-                  value={entry.couldDoBetter}
-                  onChange={(e) => handleChange('couldDoBetter', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  placeholder="One sentence..."
-                />
+              {/* Journal Entries */}
+              <div className="space-y-10">
+                {/* Entry 1 */}
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What did you accomplish today?
+                  </label>
+                  <textarea
+                    value={entry.accomplished}
+                    onChange={(e) => handleChange('accomplished', e.target.value)}
+                    className="journal-input"
+                    rows={6}
+                    placeholder="Today I worked on..."
+                  />
+                </div>
+
+                {/* Entry 2 */}
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What would you do differently?
+                  </label>
+                  <textarea
+                    value={entry.couldDoBetter}
+                    onChange={(e) => handleChange('couldDoBetter', e.target.value)}
+                    className="journal-input"
+                    rows={3}
+                    placeholder="Next time I&apos;ll try..."
+                  />
+                </div>
+
+                {/* Entry 3 */}
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What are you proud of today?
+                  </label>
+                  <textarea
+                    value={entry.proudHappy}
+                    onChange={(e) => handleChange('proudHappy', e.target.value)}
+                    className="journal-input"
+                    rows={3}
+                    placeholder="I&apos;m grateful for..."
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  One small win you&apos;re proud of?
-                </label>
-                <input
-                  type="text"
-                  value={entry.proudHappy}
-                  onChange={(e) => handleChange('proudHappy', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  placeholder="One sentence..."
-                />
-              </div>
-
-              <div className="flex items-center justify-between pt-4">
-                <div className="text-sm text-neutral-500">
-                  {saveStatus === 'saving' && 'Saving...'}
-                  {saveStatus === 'saved' && 'Saved'}
+              {/* Footer with save status and button */}
+              <div className="flex items-center justify-between mt-16 pt-6 border-t-2 border-ink-light/20 dark:border-sepia-warm/20">
+                <div className="font-handwriting text-lg text-ink-light/70 dark:text-sepia-warm/50">
+                  {saveStatus === 'saving' && '✍️ Saving...'}
+                  {saveStatus === 'saved' && '✓ Saved'}
                   {saveStatus === 'idle' && '\u00A0'}
                 </div>
                 <button
                   onClick={handleSubmit}
                   disabled={submitting}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-3 px-10 rounded-md transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
-                  {submitting ? 'Saving...' : 'Save my day'}
+                  {submitting ? 'Saving to calendar...' : 'Save my day'}
                 </button>
               </div>
             </div>

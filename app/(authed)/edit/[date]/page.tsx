@@ -163,16 +163,18 @@ export default function EditDatePage() {
     return (
       <AuthGate>
         <HamburgerMenu />
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 py-8">
-          <div className="max-w-2xl mx-auto px-4">
-            <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8 text-center">
-              <h1 className="text-2xl font-bold mb-4">Cannot Edit Future Dates</h1>
-              <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+        <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="journal-page rounded-lg p-12 sm:p-16 text-center">
+              <h1 className="font-handwriting text-4xl text-ink dark:text-sepia-warm mb-4">
+                Cannot Edit Future Dates
+              </h1>
+              <p className="font-serif text-xl text-ink-light dark:text-sepia-warm/70 mb-8 italic">
                 You can only create journal entries for today or past dates.
               </p>
               <button
                 onClick={() => router.push('/calendar')}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                className="bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-3 px-8 rounded-md transition-all hover:scale-105 hover:shadow-lg"
               >
                 Back to Calendar
               </button>
@@ -197,81 +199,85 @@ export default function EditDatePage() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 py-8">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h1 className="text-3xl font-bold">{dateDisplay}</h1>
-                {!isToday && (
-                  <span className="text-sm bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-3 py-1 rounded-full">
-                    Past Entry
-                  </span>
-                )}
-              </div>
-              <p className="text-neutral-500 dark:text-neutral-400">
-                {isToday ? 'Your daily journal for today' : 'Fill in your journal entry for this date'}
-              </p>
-            </div>
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="journal-page rounded-lg p-12 sm:p-16 relative">
+            <div className="absolute left-16 top-0 bottom-0 w-px bg-ink-light/20 dark:bg-sepia-warm/20"></div>
 
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  What did you get done that day?
-                </label>
-                <textarea
-                  value={entry.accomplished}
-                  onChange={(e) => handleChange('accomplished', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  rows={6}
-                  placeholder="Write about what you accomplished..."
-                />
+            <div className="ml-4">
+              <div className="mb-12 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-4">
+                <div className="flex items-center justify-between mb-2">
+                  <h1 className="journal-date">{dateDisplay}</h1>
+                  {!isToday && (
+                    <span className="font-handwriting text-lg bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-4 py-1 rounded-full">
+                      Past Entry
+                    </span>
+                  )}
+                </div>
+                <p className="font-handwriting text-xl text-ink-light dark:text-sepia-warm/60 italic">
+                  {isToday ? 'My daily reflection' : 'Reflecting on this day'}
+                </p>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  One thing you&apos;d do differently next time?
-                </label>
-                <input
-                  type="text"
-                  value={entry.couldDoBetter}
-                  onChange={(e) => handleChange('couldDoBetter', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  placeholder="One sentence..."
-                />
+              <div className="space-y-10">
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What did you accomplish that day?
+                  </label>
+                  <textarea
+                    value={entry.accomplished}
+                    onChange={(e) => handleChange('accomplished', e.target.value)}
+                    className="journal-input"
+                    rows={6}
+                    placeholder="That day I worked on..."
+                  />
+                </div>
+
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What would you do differently?
+                  </label>
+                  <textarea
+                    value={entry.couldDoBetter}
+                    onChange={(e) => handleChange('couldDoBetter', e.target.value)}
+                    className="journal-input"
+                    rows={3}
+                    placeholder="Next time I&apos;ll try..."
+                  />
+                </div>
+
+                <div>
+                  <label className="journal-prompt block mb-3">
+                    What are you proud of?
+                  </label>
+                  <textarea
+                    value={entry.proudHappy}
+                    onChange={(e) => handleChange('proudHappy', e.target.value)}
+                    className="journal-input"
+                    rows={3}
+                    placeholder="I&apos;m grateful for..."
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  One small win you&apos;re proud of?
-                </label>
-                <input
-                  type="text"
-                  value={entry.proudHappy}
-                  onChange={(e) => handleChange('proudHappy', e.target.value)}
-                  className="w-full px-4 py-3 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-neutral-700 dark:text-white"
-                  placeholder="One sentence..."
-                />
-              </div>
-
-              <div className="flex items-center justify-between pt-4">
-                <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between mt-16 pt-6 border-t-2 border-ink-light/20 dark:border-sepia-warm/20">
+                <div className="flex items-center gap-6">
                   <button
                     onClick={() => router.push('/calendar')}
-                    className="text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200"
+                    className="font-handwriting text-xl text-ink-light dark:text-sepia-warm hover:text-ink dark:hover:text-sepia-warm/90 transition-colors"
                   >
-                    ← Back to Calendar
+                    ← Calendar
                   </button>
-                  <div className="text-sm text-neutral-500">
-                    {saveStatus === 'saving' && 'Saving...'}
-                    {saveStatus === 'saved' && 'Saved'}
+                  <div className="font-handwriting text-lg text-ink-light/70 dark:text-sepia-warm/50">
+                    {saveStatus === 'saving' && '✍️ Saving...'}
+                    {saveStatus === 'saved' && '✓ Saved'}
                     {saveStatus === 'idle' && '\u00A0'}
                   </div>
                 </div>
                 <button
                   onClick={handleSubmit}
                   disabled={submitting}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-3 px-10 rounded-md transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {submitting ? 'Saving...' : 'Save Entry'}
                 </button>

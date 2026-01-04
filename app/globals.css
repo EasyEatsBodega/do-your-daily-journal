@@ -3,26 +3,88 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5ebe0;
+  --foreground: #2c2416;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1510;
+    --foreground: #e8dcc8;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-crimson), Georgia, serif;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Journal paper effect */
+  .journal-page {
+    @apply bg-paper dark:bg-paper-dark shadow-2xl;
+    background-image:
+      linear-gradient(transparent 0%, transparent calc(100% - 1px), #d4a574 100%),
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(212, 165, 116, 0.15) 31px,
+        rgba(212, 165, 116, 0.15) 32px
+      );
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.12),
+      0 10px 30px rgba(0,0,0,0.08),
+      inset 0 0 100px rgba(255,255,255,0.05);
+  }
+
+  .dark .journal-page {
+    background-image:
+      linear-gradient(transparent 0%, transparent calc(100% - 1px), #5a4a3a 100%),
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(90, 74, 58, 0.2) 31px,
+        rgba(90, 74, 58, 0.2) 32px
+      );
+    box-shadow:
+      0 1px 3px rgba(0,0,0,0.3),
+      0 10px 30px rgba(0,0,0,0.3),
+      inset 0 0 100px rgba(0,0,0,0.1);
+  }
+
+  /* Journal input styling */
+  .journal-input {
+    @apply bg-transparent border-none outline-none w-full resize-none;
+    @apply text-ink dark:text-sepia-warm;
+    @apply font-serif text-lg leading-8;
+    line-height: 32px; /* Match the ruled lines */
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .journal-input::placeholder {
+    @apply text-ink-light/40 dark:text-sepia-warm/30 italic;
+  }
+
+  .journal-input:focus {
+    @apply outline-none ring-0;
+  }
+
+  /* Handwriting style for labels */
+  .journal-prompt {
+    @apply font-handwriting text-2xl text-ink-light dark:text-sepia-warm/70;
+  }
+
+  /* Date header styling */
+  .journal-date {
+    @apply font-handwriting text-4xl text-ink dark:text-sepia-warm;
   }
 }
 

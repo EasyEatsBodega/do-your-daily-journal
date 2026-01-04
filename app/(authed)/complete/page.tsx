@@ -55,7 +55,7 @@ function CompletePageContent() {
     return (
       <AuthGate>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-lg">Loading...</div>
+          <div className="text-lg font-serif">Loading...</div>
         </div>
       </AuthGate>
     )
@@ -65,7 +65,7 @@ function CompletePageContent() {
     return (
       <AuthGate>
         <div className="min-h-screen flex items-center justify-center">
-          <div className="text-lg">Entry not found</div>
+          <div className="text-lg font-serif">Entry not found</div>
         </div>
       </AuthGate>
     )
@@ -74,62 +74,73 @@ function CompletePageContent() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-800 dark:to-neutral-900 py-8">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
-            <h1 className="text-4xl font-bold mb-2 text-center">Saved.</h1>
-            <p className="text-xl font-semibold text-blue-600 dark:text-blue-400 text-center mb-2">
-              {dateDisplay}
-            </p>
-            <p className="text-neutral-600 dark:text-neutral-400 text-center mb-8">
-              Your journal is now attached to {dateDisplay} in Google Calendar.
-            </p>
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="journal-page rounded-lg p-12 sm:p-16 relative">
+            <div className="absolute left-16 top-0 bottom-0 w-px bg-ink-light/20 dark:bg-sepia-warm/20"></div>
 
-            <div className="bg-neutral-50 dark:bg-neutral-700 rounded-lg p-6 space-y-4 mb-6">
-              <div>
-                <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
-                  What I accomplished
-                </h3>
-                <p className="text-neutral-900 dark:text-neutral-100">
-                  {entry.accomplished}
+            <div className="ml-4">
+              {/* Success Header */}
+              <div className="text-center mb-12">
+                <h1 className="font-handwriting text-5xl text-ink dark:text-sepia-warm mb-3">
+                  Saved ✓
+                </h1>
+                <p className="journal-date mb-2">
+                  {dateDisplay}
+                </p>
+                <p className="font-serif text-lg text-ink-light dark:text-sepia-warm/70 italic">
+                  Your journal is preserved in Google Calendar
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
-                  What I could do better
-                </h3>
-                <p className="text-neutral-900 dark:text-neutral-100">
-                  {entry.couldDoBetter}
-                </p>
+
+              {/* Journal Entry Preview */}
+              <div className="space-y-8 mb-12 border-t-2 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 py-8">
+                <div>
+                  <h3 className="journal-prompt text-xl mb-2">
+                    What I accomplished
+                  </h3>
+                  <p className="font-serif text-lg text-ink dark:text-sepia-warm leading-relaxed">
+                    {entry.accomplished}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="journal-prompt text-xl mb-2">
+                    What I could do better
+                  </h3>
+                  <p className="font-serif text-lg text-ink dark:text-sepia-warm leading-relaxed">
+                    {entry.couldDoBetter}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="journal-prompt text-xl mb-2">
+                    What I&apos;m proud of
+                  </h3>
+                  <p className="font-serif text-lg text-ink dark:text-sepia-warm leading-relaxed">
+                    {entry.proudHappy}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
-                  What I&apos;m proud of
-                </h3>
-                <p className="text-neutral-900 dark:text-neutral-100">
-                  {entry.proudHappy}
-                </p>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 justify-center mb-8">
+                <button
+                  onClick={() => router.push(`/edit/${date}`)}
+                  className="bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-3 px-8 rounded-md transition-all hover:scale-105 hover:shadow-lg"
+                >
+                  Edit entry
+                </button>
+                <button
+                  onClick={() => router.push(`/entry/${date}`)}
+                  className="border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm font-handwriting text-xl py-3 px-8 rounded-md transition-all hover:scale-105"
+                >
+                  View entry
+                </button>
               </div>
+
+              <p className="text-center font-handwriting text-xl text-ink-light/70 dark:text-sepia-warm/60 italic">
+                See you tomorrow... We&apos;ll remind you at 8pm
+              </p>
             </div>
-
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={() => router.push(`/edit/${date}`)}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                Edit entry
-              </button>
-              <button
-                onClick={() => router.push(`/entry/${date}`)}
-                className="bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 font-semibold py-3 px-6 rounded-lg transition-colors"
-              >
-                View entry
-              </button>
-            </div>
-
-            <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
-              Come back tomorrow. We&apos;ll remind you at 8pm.
-            </p>
           </div>
         </div>
       </div>

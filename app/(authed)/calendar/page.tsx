@@ -117,51 +117,51 @@ export default function CalendarPage() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 py-8">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl p-8">
+      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="journal-page rounded-lg p-8 sm:p-12">
             {/* Header */}
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-10 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-6">
               <button
                 onClick={() => router.push('/today')}
-                className="text-sm text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+                className="font-handwriting text-xl text-ink-light dark:text-sepia-warm hover:text-ink dark:hover:text-sepia-warm/90 transition-colors"
               >
-                ← Back to Today
+                ← Today
               </button>
-              <h1 className="text-2xl font-bold">Your Journal Calendar</h1>
-              <div className="w-24"></div>
+              <h1 className="font-handwriting text-4xl text-ink dark:text-sepia-warm">My Journal</h1>
+              <div className="w-20"></div>
             </div>
 
             {/* Month Navigation */}
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-8">
               <button
                 onClick={previousMonth}
-                className="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 rounded-lg transition-colors"
+                className="font-handwriting text-lg px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all"
               >
                 ← Previous
               </button>
               <div className="flex items-center gap-4">
-                <h2 className="text-xl font-semibold">{monthName}</h2>
+                <h2 className="journal-date text-3xl">{monthName}</h2>
                 <button
                   onClick={goToToday}
-                  className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800 text-blue-700 dark:text-blue-200 rounded transition-colors"
+                  className="font-handwriting text-base px-3 py-1 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 rounded-full hover:scale-105 transition-transform"
                 >
                   Today
                 </button>
               </div>
               <button
                 onClick={nextMonth}
-                className="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 rounded-lg transition-colors"
+                className="font-handwriting text-lg px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all"
               >
                 Next →
               </button>
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-2 mb-8">
               {/* Day headers */}
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center font-semibold text-sm text-neutral-600 dark:text-neutral-400 py-2">
+                <div key={day} className="text-center font-handwriting text-lg text-ink-light dark:text-sepia-warm/70 py-2">
                   {day}
                 </div>
               ))}
@@ -188,27 +188,27 @@ export default function CalendarPage() {
                     onClick={() => handleDateClick(dateStr)}
                     disabled={isFuture}
                     className={`
-                      aspect-square p-2 rounded-lg transition-all
-                      ${isToday ? 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/30' : ''}
-                      ${hasEntry && isSubmitted ? 'bg-green-100 dark:bg-green-900/30 hover:bg-green-200 dark:hover:bg-green-800/40' : ''}
-                      ${hasEntry && !isSubmitted ? 'bg-yellow-100 dark:bg-yellow-900/30 hover:bg-yellow-200 dark:hover:bg-yellow-800/40' : ''}
-                      ${!hasEntry && isPast ? 'bg-neutral-100 dark:bg-neutral-700/50 hover:bg-neutral-200 dark:hover:bg-neutral-600/50 border-2 border-dashed border-neutral-300 dark:border-neutral-600' : ''}
-                      ${!hasEntry && !isToday && !isFuture && !isPast ? 'bg-neutral-50 dark:bg-neutral-700/30' : ''}
-                      ${isFuture ? 'bg-neutral-50 dark:bg-neutral-800 opacity-40 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
+                      aspect-square p-2 rounded-md transition-all font-handwriting text-base
+                      ${isToday ? 'ring-2 ring-amber-600 dark:ring-amber-400 bg-amber-50 dark:bg-amber-900/30 shadow-md' : ''}
+                      ${hasEntry && isSubmitted ? 'bg-ink/10 dark:bg-sepia-warm/20 hover:bg-ink/20 dark:hover:bg-sepia-warm/30 border border-ink/30 dark:border-sepia-warm/30' : ''}
+                      ${hasEntry && !isSubmitted ? 'bg-amber-100/50 dark:bg-amber-900/20 hover:bg-amber-200/50 dark:hover:bg-amber-800/30 border border-amber-400/40 dark:border-amber-600/40' : ''}
+                      ${!hasEntry && isPast ? 'bg-paper/50 dark:bg-paper-dark/30 hover:bg-ink/10 dark:hover:bg-sepia-warm/10 border-2 border-dashed border-ink-light/30 dark:border-sepia-warm/30' : ''}
+                      ${!hasEntry && !isToday && !isFuture && !isPast ? 'bg-transparent' : ''}
+                      ${isFuture ? 'bg-transparent opacity-30 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
                     `}
                   >
-                    <div className="text-sm font-medium">{day}</div>
+                    <div className="font-handwriting text-lg text-ink dark:text-sepia-warm">{day}</div>
                     {hasEntry && (
                       <div className="mt-1">
                         {isSubmitted ? (
-                          <div className="text-xs text-green-700 dark:text-green-300">✓</div>
+                          <div className="text-sm text-ink dark:text-sepia-warm">✓</div>
                         ) : (
-                          <div className="text-xs text-yellow-700 dark:text-yellow-300">○</div>
+                          <div className="text-sm text-amber-700 dark:text-amber-300">•</div>
                         )}
                       </div>
                     )}
                     {isToday && !hasEntry && (
-                      <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">Today</div>
+                      <div className="text-xs text-amber-700 dark:text-amber-400 mt-1 font-serif italic">today</div>
                     )}
                   </button>
                 )
@@ -216,45 +216,45 @@ export default function CalendarPage() {
             </div>
 
             {/* Legend */}
-            <div className="mt-8 flex gap-6 justify-center text-sm flex-wrap">
+            <div className="flex gap-6 justify-center flex-wrap border-t-2 border-ink-light/20 dark:border-sepia-warm/20 pt-6 mb-6">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded"></div>
-                <span className="text-neutral-600 dark:text-neutral-400">Completed (✓)</span>
+                <div className="w-5 h-5 bg-ink/10 dark:bg-sepia-warm/20 rounded border border-ink/30 dark:border-sepia-warm/30"></div>
+                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Completed ✓</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-yellow-100 dark:bg-yellow-900/30 rounded"></div>
-                <span className="text-neutral-600 dark:text-neutral-400">Draft (○)</span>
+                <div className="w-5 h-5 bg-amber-100/50 dark:bg-amber-900/20 rounded border border-amber-400/40 dark:border-amber-600/40"></div>
+                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Draft •</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-blue-50 dark:bg-blue-900/30 rounded ring-2 ring-blue-500"></div>
-                <span className="text-neutral-600 dark:text-neutral-400">Today</span>
+                <div className="w-5 h-5 bg-amber-50 dark:bg-amber-900/30 rounded ring-2 ring-amber-600 dark:ring-amber-400"></div>
+                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Today</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-neutral-100 dark:bg-neutral-700/50 rounded border-2 border-dashed border-neutral-300 dark:border-neutral-600"></div>
-                <span className="text-neutral-600 dark:text-neutral-400">Past (clickable)</span>
+                <div className="w-5 h-5 bg-paper/50 dark:bg-paper-dark/30 rounded border-2 border-dashed border-ink-light/30 dark:border-sepia-warm/30"></div>
+                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Empty (clickable)</span>
               </div>
             </div>
 
             {/* Stats */}
-            <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
-              <div className="grid grid-cols-3 gap-4 text-center">
+            <div className="pt-6 border-t-2 border-ink-light/20 dark:border-sepia-warm/20">
+              <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                  <div className="font-handwriting text-4xl text-ink dark:text-sepia-warm mb-1">
                     {entries.filter(e => e.status === 'SUBMITTED').length}
                   </div>
-                  <div className="text-sm text-neutral-600 dark:text-neutral-400">Total Entries</div>
+                  <div className="font-serif text-sm text-ink-light dark:text-sepia-warm/70">Total Entries</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                  <div className="font-handwriting text-4xl text-ink dark:text-sepia-warm mb-1">
                     {entries.filter(e => e.status === 'SUBMITTED').length}
                   </div>
-                  <div className="text-sm text-neutral-600 dark:text-neutral-400">Completed</div>
+                  <div className="font-serif text-sm text-ink-light dark:text-sepia-warm/70">Completed</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                  <div className="font-handwriting text-4xl text-amber-700 dark:text-amber-400 mb-1">
                     {entries.filter(e => e.status === 'DRAFT').length}
                   </div>
-                  <div className="text-sm text-neutral-600 dark:text-neutral-400">Drafts</div>
+                  <div className="font-serif text-sm text-ink-light dark:text-sepia-warm/70">Drafts</div>
                 </div>
               </div>
             </div>
