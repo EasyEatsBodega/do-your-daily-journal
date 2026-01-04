@@ -117,51 +117,54 @@ export default function CalendarPage() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen py-6 sm:py-12 px-2 sm:px-4 lg:px-8 pb-safe">
         <div className="max-w-5xl mx-auto">
-          <div className="journal-page rounded-lg p-8 sm:p-12">
+          <div className="journal-page rounded-lg p-4 sm:p-8 lg:p-12">
             {/* Header */}
-            <div className="flex justify-between items-center mb-10 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-6">
+            <div className="flex justify-between items-center mb-6 sm:mb-10 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-4 sm:pb-6">
               <button
                 onClick={() => router.push('/today')}
-                className="font-handwriting text-xl text-ink-light dark:text-sepia-warm hover:text-ink dark:hover:text-sepia-warm/90 transition-colors"
+                className="font-handwriting text-lg sm:text-xl text-ink-light dark:text-sepia-warm hover:text-ink dark:hover:text-sepia-warm/90 transition-colors touch-manipulation"
               >
                 ← Today
               </button>
-              <h1 className="font-handwriting text-4xl text-ink dark:text-sepia-warm">My Journal</h1>
-              <div className="w-20"></div>
+              <h1 className="font-handwriting text-2xl sm:text-4xl text-ink dark:text-sepia-warm">My Journal</h1>
+              <div className="w-16 sm:w-20"></div>
             </div>
 
             {/* Month Navigation */}
-            <div className="flex justify-between items-center mb-8">
-              <button
-                onClick={previousMonth}
-                className="font-handwriting text-lg px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all"
-              >
-                ← Previous
-              </button>
-              <div className="flex items-center gap-4">
-                <h2 className="journal-date text-3xl">{monthName}</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 gap-4">
+              <div className="flex items-center gap-2 sm:gap-4 order-2 sm:order-1">
+                <button
+                  onClick={previousMonth}
+                  className="font-handwriting text-base sm:text-lg px-3 sm:px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all touch-manipulation"
+                >
+                  ←
+                </button>
+                <button
+                  onClick={nextMonth}
+                  className="font-handwriting text-base sm:text-lg px-3 sm:px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all touch-manipulation"
+                >
+                  →
+                </button>
+              </div>
+              <div className="flex items-center gap-3 sm:gap-4 order-1 sm:order-2">
+                <h2 className="journal-date text-2xl sm:text-3xl">{monthName}</h2>
                 <button
                   onClick={goToToday}
-                  className="font-handwriting text-base px-3 py-1 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 rounded-full hover:scale-105 transition-transform"
+                  className="font-handwriting text-sm sm:text-base px-2 sm:px-3 py-1 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 rounded-full hover:scale-105 transition-transform touch-manipulation"
                 >
                   Today
                 </button>
               </div>
-              <button
-                onClick={nextMonth}
-                className="font-handwriting text-lg px-4 py-2 border-2 border-ink dark:border-sepia-warm text-ink dark:text-sepia-warm rounded-md hover:bg-ink hover:text-paper dark:hover:bg-sepia-warm dark:hover:text-paper-dark transition-all"
-              >
-                Next →
-              </button>
+              <div className="w-16 sm:w-20 hidden sm:block order-3"></div>
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-3 mb-8">
+            <div className="grid grid-cols-7 gap-1.5 sm:gap-3 mb-6 sm:mb-8">
               {/* Day headers */}
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center font-handwriting text-2xl text-ink dark:text-sepia-warm font-semibold py-3 border-b-2 border-ink-light/20 dark:border-sepia-warm/20">
+                <div key={day} className="text-center font-handwriting text-base sm:text-2xl text-ink dark:text-sepia-warm font-semibold py-2 sm:py-3 border-b-2 border-ink-light/20 dark:border-sepia-warm/20">
                   {day}
                 </div>
               ))}
@@ -188,8 +191,8 @@ export default function CalendarPage() {
                     onClick={() => handleDateClick(dateStr)}
                     disabled={isFuture}
                     className={`
-                      aspect-square p-3 rounded-lg transition-all relative
-                      flex flex-col items-center justify-center
+                      aspect-square p-1.5 sm:p-3 rounded-md sm:rounded-lg transition-all relative
+                      flex flex-col items-center justify-center touch-manipulation
                       ${isToday && !hasEntry ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
                       ${isToday && hasEntry && isSubmitted ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
                       ${isToday && hasEntry && !isSubmitted ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
@@ -200,7 +203,7 @@ export default function CalendarPage() {
                       ${isFuture ? 'bg-transparent opacity-20 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
                     `}
                   >
-                    <div className={`font-handwriting text-2xl font-bold mb-1 ${
+                    <div className={`font-handwriting text-lg sm:text-2xl font-bold mb-0.5 sm:mb-1 ${
                       isToday ? 'text-blue-900 dark:text-blue-100' :
                       hasEntry && isSubmitted ? 'text-green-900 dark:text-green-100' :
                       hasEntry && !isSubmitted ? 'text-orange-900 dark:text-orange-100' :
@@ -209,16 +212,16 @@ export default function CalendarPage() {
                       {day}
                     </div>
                     {hasEntry && (
-                      <div className="absolute bottom-2">
+                      <div className="absolute bottom-0.5 sm:bottom-2">
                         {isSubmitted ? (
-                          <div className={`text-lg font-bold ${isToday ? 'text-green-700 dark:text-green-300' : 'text-green-700 dark:text-green-400'}`}>✓</div>
+                          <div className={`text-sm sm:text-lg font-bold ${isToday ? 'text-green-700 dark:text-green-300' : 'text-green-700 dark:text-green-400'}`}>✓</div>
                         ) : (
-                          <div className={`text-lg font-bold ${isToday ? 'text-orange-700 dark:text-orange-300' : 'text-orange-600 dark:text-orange-400'}`}>⋯</div>
+                          <div className={`text-sm sm:text-lg font-bold ${isToday ? 'text-orange-700 dark:text-orange-300' : 'text-orange-600 dark:text-orange-400'}`}>⋯</div>
                         )}
                       </div>
                     )}
                     {isToday && !hasEntry && (
-                      <div className="absolute bottom-1 text-xs font-serif font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">Today</div>
+                      <div className="absolute bottom-0 sm:bottom-1 text-[10px] sm:text-xs font-serif font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">Today</div>
                     )}
                   </button>
                 )

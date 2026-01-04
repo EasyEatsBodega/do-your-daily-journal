@@ -24,6 +24,22 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Mobile-specific utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Prevent text selection on touch devices */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 @layer components {

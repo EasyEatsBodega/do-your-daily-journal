@@ -155,15 +155,15 @@ export default function TodayPage() {
   return (
     <AuthGate>
       <HamburgerMenu />
-      <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen py-6 sm:py-12 px-3 sm:px-4 lg:px-8 pb-safe">
         <div className="max-w-3xl mx-auto">
           {/* Journal Book Container */}
-          <div className="journal-page rounded-lg p-12 sm:p-16 relative">
-            {/* Decorative margin line (like a real journal) */}
-            <div className="absolute left-16 top-0 bottom-0 w-px bg-ink-light/20 dark:bg-sepia-warm/20"></div>
+          <div className="journal-page rounded-lg p-6 sm:p-12 lg:p-16 relative">
+            {/* Decorative margin line (like a real journal) - hidden on mobile */}
+            <div className="hidden sm:block absolute left-12 sm:left-16 top-0 bottom-0 w-px bg-ink-light/20 dark:bg-sepia-warm/20"></div>
 
             {/* Content with left margin */}
-            <div className="ml-4">
+            <div className="sm:ml-4">
               {/* Date Header */}
               <div className="mb-12 border-b-2 border-ink-light/20 dark:border-sepia-warm/20 pb-4">
                 <h1 className="journal-date mb-2">{dateDisplay}</h1>
@@ -218,8 +218,8 @@ export default function TodayPage() {
               </div>
 
               {/* Footer with save status and button */}
-              <div className="flex items-center justify-between mt-16 pt-6 border-t-2 border-ink-light/20 dark:border-sepia-warm/20">
-                <div className="font-handwriting text-lg text-ink-light/70 dark:text-sepia-warm/50">
+              <div className="flex flex-col sm:flex-row items-center justify-between mt-12 sm:mt-16 pt-6 border-t-2 border-ink-light/20 dark:border-sepia-warm/20 gap-4">
+                <div className="font-handwriting text-base sm:text-lg text-ink-light/70 dark:text-sepia-warm/50 order-2 sm:order-1">
                   {saveStatus === 'saving' && '✍️ Saving...'}
                   {saveStatus === 'saved' && '✓ Saved'}
                   {saveStatus === 'idle' && '\u00A0'}
@@ -227,7 +227,7 @@ export default function TodayPage() {
                 <button
                   onClick={handleSubmit}
                   disabled={submitting}
-                  className="bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-xl py-3 px-10 rounded-md transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full sm:w-auto bg-ink dark:bg-sepia-warm text-paper dark:text-paper-dark font-handwriting text-lg sm:text-xl py-4 sm:py-3 px-8 sm:px-10 rounded-md transition-all hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 order-1 sm:order-2 touch-manipulation"
                 >
                   {submitting ? 'Saving to calendar...' : 'Save my day'}
                 </button>

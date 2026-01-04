@@ -15,8 +15,23 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Calendar Journal",
+  title: "Daily Entry",
   description: "Your day, saved to your calendar.",
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f5ebe0' },
+    { media: '(prefers-color-scheme: dark)', color: '#1a1510' },
+  ],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Daily Entry',
+  },
 };
 
 export default function RootLayout({
