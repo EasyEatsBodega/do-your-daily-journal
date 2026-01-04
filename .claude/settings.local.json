@@ -10,7 +10,9 @@
       "Bash(git remote set-url:*)",
       "Bash(git fetch:*)",
       "Bash(git pull:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(wc:*)",
+      "Bash(ls:*)"
     ]
   }
 }
