@@ -32,7 +32,7 @@ function LoginPageContent() {
       <div className="max-w-lg w-full mx-4">
         <div className="journal-page rounded-lg p-10 sm:p-12">
           <h1 className="font-handwriting text-5xl text-ink dark:text-sepia-warm mb-3 text-center">
-            Calendar Journal
+            Daily Entry
           </h1>
           <p className="font-serif text-xl text-ink-light dark:text-sepia-warm/80 text-center mb-8 italic">
             Your day, saved to your calendar
