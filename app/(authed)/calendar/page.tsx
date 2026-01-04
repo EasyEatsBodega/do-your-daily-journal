@@ -73,12 +73,19 @@ export default function CalendarPage() {
 
   const handleDateClick = (dateStr: string) => {
     const entry = getEntryForDate(dateStr)
+    const isFuture = todayDate && dateStr > todayDate
+
+    // Don't allow clicking future dates
+    if (isFuture) {
+      return
+    }
+
+    // Today goes to /today, all other dates (past with or without entries) go to /edit/[date]
     if (dateStr === todayDate) {
       router.push('/today')
-    } else if (entry) {
-      router.push(`/entry/${dateStr}`)
+    } else {
+      router.push(`/edit/${dateStr}`)
     }
-    // Don't allow clicking future dates or dates without entries
   }
 
   const previousMonth = () => {
@@ -173,20 +180,21 @@ export default function CalendarPage() {
                 const hasEntry = !!entry
                 const isSubmitted = entry?.status === 'SUBMITTED'
                 const isFuture = todayDate && dateStr > todayDate
+                const isPast = todayDate && dateStr < todayDate
 
                 return (
                   <button
                     key={day}
                     onClick={() => handleDateClick(dateStr)}
-                    disabled={!hasEntry && !isToday}
+                    disabled={isFuture}
                     className={`
                       aspect-square p-2 rounded-lg transition-all
                       ${isToday ? 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/30' : ''}
                       ${hasEntry && isSubmitted ? 'bg-green-100 dark:bg-green-900/30 hover:bg-green-200 dark:hover:bg-green-800/40' : ''}
                       ${hasEntry && !isSubmitted ? 'bg-yellow-100 dark:bg-yellow-900/30 hover:bg-yellow-200 dark:hover:bg-yellow-800/40' : ''}
-                      ${!hasEntry && !isToday && !isFuture ? 'bg-neutral-50 dark:bg-neutral-700/30' : ''}
-                      ${isFuture ? 'bg-neutral-50 dark:bg-neutral-800 opacity-40 cursor-not-allowed' : ''}
-                      ${hasEntry || isToday ? 'cursor-pointer' : 'cursor-default'}
+                      ${!hasEntry && isPast ? 'bg-neutral-100 dark:bg-neutral-700/50 hover:bg-neutral-200 dark:hover:bg-neutral-600/50 border-2 border-dashed border-neutral-300 dark:border-neutral-600' : ''}
+                      ${!hasEntry && !isToday && !isFuture && !isPast ? 'bg-neutral-50 dark:bg-neutral-700/30' : ''}
+                      ${isFuture ? 'bg-neutral-50 dark:bg-neutral-800 opacity-40 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
                     `}
                   >
                     <div className="text-sm font-medium">{day}</div>
@@ -208,7 +216,7 @@ export default function CalendarPage() {
             </div>
 
             {/* Legend */}
-            <div className="mt-8 flex gap-6 justify-center text-sm">
+            <div className="mt-8 flex gap-6 justify-center text-sm flex-wrap">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-green-100 dark:bg-green-900/30 rounded"></div>
                 <span className="text-neutral-600 dark:text-neutral-400">Completed (✓)</span>
@@ -220,6 +228,10 @@ export default function CalendarPage() {
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-blue-50 dark:bg-blue-900/30 rounded ring-2 ring-blue-500"></div>
                 <span className="text-neutral-600 dark:text-neutral-400">Today</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-neutral-100 dark:bg-neutral-700/50 rounded border-2 border-dashed border-neutral-300 dark:border-neutral-600"></div>
+                <span className="text-neutral-600 dark:text-neutral-400">Past (clickable)</span>
               </div>
             </div>
 
