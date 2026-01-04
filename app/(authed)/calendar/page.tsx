@@ -179,8 +179,8 @@ export default function CalendarPage() {
                 const isToday = dateStr === todayDate
                 const hasEntry = !!entry
                 const isSubmitted = entry?.status === 'SUBMITTED'
-                const isFuture = todayDate && dateStr > todayDate
-                const isPast = todayDate && dateStr < todayDate
+                const isFuture = !!(todayDate && dateStr > todayDate)
+                const isPast = !!(todayDate && dateStr < todayDate)
 
                 return (
                   <button
