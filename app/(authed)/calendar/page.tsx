@@ -158,10 +158,10 @@ export default function CalendarPage() {
             </div>
 
             {/* Calendar Grid */}
-            <div className="grid grid-cols-7 gap-2 mb-8">
+            <div className="grid grid-cols-7 gap-3 mb-8">
               {/* Day headers */}
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center font-handwriting text-lg text-ink-light dark:text-sepia-warm/70 py-2">
+                <div key={day} className="text-center font-handwriting text-2xl text-ink dark:text-sepia-warm font-semibold py-3 border-b-2 border-ink-light/20 dark:border-sepia-warm/20">
                   {day}
                 </div>
               ))}
@@ -188,27 +188,37 @@ export default function CalendarPage() {
                     onClick={() => handleDateClick(dateStr)}
                     disabled={isFuture}
                     className={`
-                      aspect-square p-2 rounded-md transition-all font-handwriting text-base
-                      ${isToday ? 'ring-2 ring-amber-600 dark:ring-amber-400 bg-amber-50 dark:bg-amber-900/30 shadow-md' : ''}
-                      ${hasEntry && isSubmitted ? 'bg-ink/10 dark:bg-sepia-warm/20 hover:bg-ink/20 dark:hover:bg-sepia-warm/30 border border-ink/30 dark:border-sepia-warm/30' : ''}
-                      ${hasEntry && !isSubmitted ? 'bg-amber-100/50 dark:bg-amber-900/20 hover:bg-amber-200/50 dark:hover:bg-amber-800/30 border border-amber-400/40 dark:border-amber-600/40' : ''}
-                      ${!hasEntry && isPast ? 'bg-paper/50 dark:bg-paper-dark/30 hover:bg-ink/10 dark:hover:bg-sepia-warm/10 border-2 border-dashed border-ink-light/30 dark:border-sepia-warm/30' : ''}
-                      ${!hasEntry && !isToday && !isFuture && !isPast ? 'bg-transparent' : ''}
-                      ${isFuture ? 'bg-transparent opacity-30 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
+                      aspect-square p-3 rounded-lg transition-all relative
+                      flex flex-col items-center justify-center
+                      ${isToday && !hasEntry ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
+                      ${isToday && hasEntry && isSubmitted ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900/40 dark:to-green-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
+                      ${isToday && hasEntry && !isSubmitted ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-900/40 dark:to-orange-800/40 ring-4 ring-blue-500 dark:ring-blue-400 shadow-lg' : ''}
+                      ${!isToday && hasEntry && isSubmitted ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/30 border-2 border-green-600 dark:border-green-500 shadow-md hover:shadow-xl' : ''}
+                      ${!isToday && hasEntry && !isSubmitted ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/30 border-2 border-orange-500 dark:border-orange-400 shadow-md hover:shadow-xl' : ''}
+                      ${!hasEntry && isPast && !isToday ? 'bg-paper dark:bg-paper-dark/50 border-2 border-dashed border-ink-light/40 dark:border-sepia-warm/40 hover:bg-ink/5 dark:hover:bg-sepia-warm/10' : ''}
+                      ${!hasEntry && !isToday && !isFuture && !isPast ? 'bg-paper/30 dark:bg-paper-dark/20' : ''}
+                      ${isFuture ? 'bg-transparent opacity-20 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
                     `}
                   >
-                    <div className="font-handwriting text-lg text-ink dark:text-sepia-warm">{day}</div>
+                    <div className={`font-handwriting text-2xl font-bold mb-1 ${
+                      isToday ? 'text-blue-900 dark:text-blue-100' :
+                      hasEntry && isSubmitted ? 'text-green-900 dark:text-green-100' :
+                      hasEntry && !isSubmitted ? 'text-orange-900 dark:text-orange-100' :
+                      'text-ink dark:text-sepia-warm'
+                    }`}>
+                      {day}
+                    </div>
                     {hasEntry && (
-                      <div className="mt-1">
+                      <div className="absolute bottom-2">
                         {isSubmitted ? (
-                          <div className="text-sm text-ink dark:text-sepia-warm">✓</div>
+                          <div className={`text-lg font-bold ${isToday ? 'text-green-700 dark:text-green-300' : 'text-green-700 dark:text-green-400'}`}>✓</div>
                         ) : (
-                          <div className="text-sm text-amber-700 dark:text-amber-300">•</div>
+                          <div className={`text-lg font-bold ${isToday ? 'text-orange-700 dark:text-orange-300' : 'text-orange-600 dark:text-orange-400'}`}>⋯</div>
                         )}
                       </div>
                     )}
                     {isToday && !hasEntry && (
-                      <div className="text-xs text-amber-700 dark:text-amber-400 mt-1 font-serif italic">today</div>
+                      <div className="absolute bottom-1 text-xs font-serif font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wide">Today</div>
                     )}
                   </button>
                 )
@@ -216,22 +226,26 @@ export default function CalendarPage() {
             </div>
 
             {/* Legend */}
-            <div className="flex gap-6 justify-center flex-wrap border-t-2 border-ink-light/20 dark:border-sepia-warm/20 pt-6 mb-6">
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-ink/10 dark:bg-sepia-warm/20 rounded border border-ink/30 dark:border-sepia-warm/30"></div>
-                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Completed ✓</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 border-t-2 border-ink-light/20 dark:border-sepia-warm/20 pt-6 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/30 dark:to-green-900/30 rounded-lg border-2 border-green-600 dark:border-green-500 flex items-center justify-center">
+                  <span className="text-green-700 dark:text-green-400 font-bold">✓</span>
+                </div>
+                <span className="font-serif text-base text-ink dark:text-sepia-warm font-semibold">Completed</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-amber-100/50 dark:bg-amber-900/20 rounded border border-amber-400/40 dark:border-amber-600/40"></div>
-                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Draft •</span>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/30 rounded-lg border-2 border-orange-500 dark:border-orange-400 flex items-center justify-center">
+                  <span className="text-orange-600 dark:text-orange-400 font-bold">⋯</span>
+                </div>
+                <span className="font-serif text-base text-ink dark:text-sepia-warm font-semibold">Draft</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-amber-50 dark:bg-amber-900/30 rounded ring-2 ring-amber-600 dark:ring-amber-400"></div>
-                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Today</span>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/40 dark:to-blue-800/40 rounded-lg ring-4 ring-blue-500 dark:ring-blue-400"></div>
+                <span className="font-serif text-base text-ink dark:text-sepia-warm font-semibold">Today</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-paper/50 dark:bg-paper-dark/30 rounded border-2 border-dashed border-ink-light/30 dark:border-sepia-warm/30"></div>
-                <span className="font-serif text-sm text-ink-light dark:text-sepia-warm/80">Empty (clickable)</span>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-paper dark:bg-paper-dark/50 rounded-lg border-2 border-dashed border-ink-light/40 dark:border-sepia-warm/40"></div>
+                <span className="font-serif text-base text-ink dark:text-sepia-warm font-semibold">Empty</span>
               </div>
             </div>
 
